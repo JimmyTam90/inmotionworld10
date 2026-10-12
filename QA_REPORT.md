@@ -34,6 +34,7 @@ Generated October 12, 2026. Statuses: PASS / FAIL / NOT EXECUTED / BLOCKED.
 | `next.config.js` loads | PASS | Prod assetPrefix, rewrites, trailingSlash output confirmed via node. |
 | Data schema / unique IDs / CTA keys | PASS | 3 products, 3 collections, every key maps. |
 | Affiliate mapping (exact hrefs, one URL per key) | PASS | See section B for the authorized URL change. |
+| CTA new-tab behavior (all 11 affiliate links: `target="_blank"`, `rel` includes `noopener noreferrer`; internal links stay same-tab) | PASS | Rendered-HTML check, not a browser click test. |
 | Mobile DOM order image -> CTA | PASS | Hero and all 3 cards (DOM check only). |
 | Internal links under `/inmotion-world`, no duplicate subpath | PASS | Rendered HTML. |
 | Sitemap / robots URLs | PASS | Use public Hub URLs. |
@@ -44,10 +45,11 @@ Generated October 12, 2026. Statuses: PASS / FAIL / NOT EXECUTED / BLOCKED.
 | Regression | NOT EXECUTED | No fixes were applied after tests. |
 
 ## E. Remaining risks
+- `rel="noreferrer"` (requested) stops the browser sending a Referer header to the merchant. If the merchant's affiliate network attributes by referrer rather than the `?ref=` parameter, this could affect tracking; confirm with a test click.
 - Live affiliate attribution and merchant availability are unverified.
 - Prices (V14 $2,699, V11Y $1,399, RS $3,999) and merchant policies (free US shipping on the V14 page, 3-7 day delivery, 12-month warranty, 15-day returns) were read October 12, 2026 and can change. "Free shipping" was seen on the V14 page only, so it is worded that way.
 - The V14 merchant page lists conflicting tire sizes, so tire size is omitted. The RS "fastest" and V11Y "best-selling" merchant claims were not repeated.
 - `OFFER_DETAILS` mentions "fast US warehouse dispatch"; no warehouse claim was found on the merchant pages, so it is not used.
 - Consent banner not implemented. Add one before enabling GA4/Meta Pixel for US (e.g. California) traffic.
-- Real in-app browser behaviour (Facebook, Instagram, TikTok, Zalo) untested; CTAs are plain same-tab anchors.
+- Real in-app browser behaviour (Facebook, Instagram, TikTok, Zalo) untested; CTAs open in a new tab (`target="_blank"`, per your instruction); in-app browsers may handle new-tab links differently.
 - Remote images have no JS `onError` fallback (alt text and a tinted container only).

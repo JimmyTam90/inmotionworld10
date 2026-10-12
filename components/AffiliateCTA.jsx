@@ -2,8 +2,10 @@ import { resolveAffiliateUrl } from "@/lib/affiliate-links";
 
 // Every purchase/shop CTA goes through this component, which gets its
 // destination only from resolveAffiliateUrl(). The href is the exact supplied
-// URL. Same-tab navigation is used (no target="_blank") so the CTA behaves
-// predictably inside Facebook/Instagram/TikTok/Zalo in-app browsers.
+// URL. Every affiliate link opens the merchant in a NEW TAB (target="_blank"
+// with rel noopener noreferrer), so the landing page stays open. This is the
+// single place that sets link behavior for Hero, product cards, comparison,
+// collections and the mobile sticky CTA.
 export default function AffiliateCTA({
   productKey,
   location,
@@ -34,7 +36,8 @@ export default function AffiliateCTA({
   return (
     <a
       href={result.url}
-      rel="sponsored nofollow noopener"
+      target="_blank"
+      rel="sponsored nofollow noopener noreferrer"
       data-affiliate-key={result.key}
       data-affiliate-source={result.source}
       data-cta-location={location || "unknown"}

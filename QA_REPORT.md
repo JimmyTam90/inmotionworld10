@@ -35,6 +35,7 @@ Generated October 12, 2026. Statuses: PASS / FAIL / NOT EXECUTED / BLOCKED.
 | Data schema / unique IDs / CTA keys | PASS | 3 products, 3 collections, every key maps. |
 | Affiliate mapping (exact hrefs, one URL per key) | PASS | See section B for the authorized URL change. |
 | CTA new-tab behavior (all 11 affiliate links: `target="_blank"`, `rel` includes `noopener noreferrer`; internal links stay same-tab) | PASS | Rendered-HTML check, not a browser click test. |
+| Collections cards: category image -> title/description -> CTA, constrained 4:3 container, alt text, exact affiliate URLs, new tab | PASS | Rendered-HTML check. Images are merchant CDN URLs seen on the merchant's collection pages on October 13, 2026 (V12 Pro, Climber, honeycomb pedals); not requested at runtime, so `URL_SYNTAX_VALID` only. Scooter card shows the Climber and accessories card shows pedals, as the merchant lists them. |
 | Mobile DOM order image -> CTA | PASS | Hero and all 3 cards (DOM check only). |
 | Internal links under `/inmotion-world`, no duplicate subpath | PASS | Rendered HTML. |
 | Sitemap / robots URLs | PASS | Use public Hub URLs. |
